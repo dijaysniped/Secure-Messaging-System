@@ -104,7 +104,8 @@ public class HelloApplication extends Application {
 
         Scene scene2 = new Scene(card, 375, 650);//filler
         signin.setOnAction(e -> {
-            stage.setScene(scene2);
+        Scene loginScene = SignInScene.create(stage, stage.getScene());
+        stage.setScene(loginScene);
         });
                 // Add card to root
                 root.add(card, 0, 0);
