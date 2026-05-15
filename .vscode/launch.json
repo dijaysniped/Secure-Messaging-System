@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Secure-Messaging-System_a21177fb"
+        },
+        {
+            "type": "java",
+            "name": "Launch JavaFX",
+            "request": "launch",
+            "mainClass": "HelloApplication",
+            "vmArgs": "--module-path \"D:/Java compiler/JAVA FX/javafx-sdk-26.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
