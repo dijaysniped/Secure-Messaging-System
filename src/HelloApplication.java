@@ -68,6 +68,50 @@ public class HelloApplication extends Application {
                                 "-fx-font-weight: bold;" +
                                 "-fx-background-radius: 25;"
                 );
+                signUp.setOnAction(e -> {
+
+    String em = email.getText();
+    String user = username.getText();
+    String pass = password.getText();
+    String conf = confirm.getText();
+
+    if (em.isEmpty()
+            || user.isEmpty()
+            || pass.isEmpty()
+            || conf.isEmpty()) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText("Fill all fields");
+        alert.show();
+        return;
+    }
+
+    if (!pass.equals(conf)) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText("Passwords do not match");
+        alert.show();
+        return;
+    }
+
+    User newUser = new User(em, user, pass);
+
+    boolean registered =
+            UserManager.registerUser(newUser);
+
+    if (registered) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Registration Successful");
+        alert.show();
+
+    } else {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText("User already exists");
+        alert.show();
+    }
+});
                 card.add(signUp, 0, row++);
                 GridPane.setHalignment(signUp, HPos.CENTER);
 
@@ -104,9 +148,40 @@ public class HelloApplication extends Application {
 
         Scene scene2 = new Scene(card, 375, 650);//filler
         signin.setOnAction(e -> {
-        Scene loginScene = SignInScene.create(stage, stage.getScene());
-        stage.setScene(loginScene);
-        });
+
+    String input = email.getText();
+    String pass = password.getText();
+
+    User loggedInUser =
+        UserManager.loginUser(
+                input,
+                pass
+        );
+
+if(loggedInUser!=null){
+
+    Scene dashboard=
+            ChatDashboard.create(
+                    stage,
+                    loggedInUser.getUsername()
+            );
+
+    stage.setScene(dashboard);
+
+}
+else{
+
+    Alert alert=
+            new Alert(
+                    Alert.AlertType.ERROR
+            );
+
+    alert.setContentText(
+            "Invalid Credentials"
+    );
+
+    alert.show();
+}});
                 // Add card to root
                 root.add(card, 0, 0);
 
