@@ -6,7 +6,7 @@ import java.util.*;
 public class UserManager {
 
     private static final String FILE_PATH = "src/data/users.txt";
-
+//checks if user already exists if it doesn't then user is created
     public static boolean registerUser(User user) {
 
         try {
@@ -22,12 +22,12 @@ public class UserManager {
 
             String line;
 
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {    //if file is empty(no user created before) condition becomes false
 
                 String[] parts = line.split(",");
 
-                if (parts[0].equalsIgnoreCase(user.getEmail())
-                        || parts[1].equalsIgnoreCase(user.getUsername())) {
+                if (parts[0].equals(user.getEmail())
+                        || parts[1].equals(user.getUsername())) {
 
                     br.close();
                     return false;
@@ -55,10 +55,10 @@ public class UserManager {
             e.printStackTrace();
         }
 
-        return false;
+            return false;
     }
 
-    public static User loginUser(String input,String password){
+    public static User loginUser(String input,String user,String password){
 
         try{
 
@@ -83,8 +83,7 @@ public class UserManager {
                                 encryptedPass
                         );
 
-                if((input.equalsIgnoreCase(email)
-                        || input.equalsIgnoreCase(username))
+                if(input.equals(email) && user.equals(username)
                         && password.equals(decryptedPass)){
 
                     br.close();
