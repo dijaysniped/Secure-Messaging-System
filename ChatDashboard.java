@@ -15,9 +15,14 @@ public class ChatDashboard {
 
         BorderPane root = new BorderPane();
 
-        root.setStyle("-fx-background-color: #dee6de;");
+
+        //root.setStyle("-fx-background-color: #dee6de;");
 
         VBox usersBox = new VBox(10);
+        ScrollPane scrollPane1 = new ScrollPane(usersBox);
+        usersBox.setStyle("-fx-background-color: #dee6de;");
+        scrollPane1.setFitToWidth(true);
+
 
         usersBox.setPadding(new Insets(20));
 
@@ -61,7 +66,9 @@ public class ChatDashboard {
             }
         }
 
-        root.setCenter(usersBox);
+        root.setCenter(scrollPane1);
+
+
 
         return new Scene(root, 375, 650);
     }
